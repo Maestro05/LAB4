@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 class Author {
     private String name;
     private String surname;
