@@ -143,3 +143,93 @@ class Book {
         category.print();
     }
 }
+
+class Reader {
+    private String name;
+    private String surname;
+    private String cardNumber;
+
+    // Конструктор по умолчанию
+    public Reader() {
+        this.name = "";
+        this.surname = "";
+        this.cardNumber = "";
+    }
+
+    // Метод для ввода данных о читателе
+    public void input(Scanner scanner) {
+        System.out.print("Введите имя читателя: ");
+        this.name = scanner.nextLine();
+        System.out.print("Введите фамилию читателя: ");
+        this.surname = scanner.nextLine();
+        System.out.print("Введите номер читательского билета: ");
+        this.cardNumber = scanner.nextLine();
+    }
+
+    // Геттеры
+    public String getName() {
+        return this.name;
+    }
+
+    public String getSurname() {
+        return this.surname;
+    }
+
+    public String getCardNumber() {
+        return this.cardNumber;
+    }
+
+    // Метод для вывода данных о читателе
+    public void print() {
+        System.out.println("Читатель: " + name + " " + surname + ", Номер карты: " + cardNumber);
+    }
+}
+
+class BookIssue {
+    private Book book;
+    private Reader reader;
+    private String issueDate;
+    private String dueDate;
+
+    // Конструктор
+    public BookIssue(Book book, Reader reader, String issueDate, String dueDate) {
+        this.book = book;
+        this.reader = reader;
+        this.issueDate = issueDate;
+        this.dueDate = dueDate;
+    }
+
+    // Метод для вывода данных о выдаче книги
+    public void print() {
+        System.out.println("Выдача книги: ");
+        book.print();
+        reader.print();
+        System.out.println("Дата выдачи: " + issueDate + ", Срок возврата: " + dueDate);
+    }
+}
+
+public class LibrarySystem {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Динамическое создание книги
+        Book dynamicBook = new Book();
+        dynamicBook.input(scanner); // Вводим данные о книге
+
+        // Динамическое создание читателя
+        Reader dynamicReader = new Reader();
+        dynamicReader.input(scanner); // Вводим данные о читателе
+
+        // Ввод данных о выдаче книги
+        System.out.print("Введите дату выдачи (DD.MM.YYYY): ");
+        String issueDate = scanner.nextLine();
+        System.out.print("Введите срок возврата (DD.MM.YYYY): ");
+        String dueDate = scanner.nextLine();
+
+        // Создание записи о выдаче книги
+        BookIssue issue = new BookIssue(dynamicBook, dynamicReader, issueDate, dueDate);
+        issue.print(); // Выводим информацию о выдаче
+
+        scanner.close();
+    }
+}
